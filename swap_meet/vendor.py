@@ -1,2 +1,16 @@
+
 class Vendor:
-    pass
+
+    def __init__(self,inventory=None):
+        self.inventory = inventory or []
+
+    def add(self,item):
+        self.inventory.append(item)
+        return self.inventory[-1]
+
+    def remove(self,item):
+        for i in self.inventory:
+            if i == item:
+                self.inventory.remove(i)
+                return i
+        return None
