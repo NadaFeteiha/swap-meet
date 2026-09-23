@@ -22,8 +22,8 @@ class Vendor:
         return None
 
     def swap_items(self,other_vendor,my_item,their_item):
-        # if not my_item and not their_item:
-        #     return False
+        if not my_item and not their_item:
+            return False
 
         if my_item not in self.inventory:
             return False
@@ -48,4 +48,21 @@ class Vendor:
         return self.swap_items(other_vendor,my_item,their_item)
 
         
-        
+    def get_by_category(self,category):
+        return [item for item in self.inventory if item.get_category() == category]
+
+    def get_best_by_category(self,category):
+        items = self.get_by_category(category)
+        if not items:
+            return None
+
+        return max(items, key=lambda item: item.condition)
+
+    def swap_best_by_category(self,other_vendor,my_priority,their_priority):
+        my_item = self.get_best_by_category(their_priority)
+        their_item = other_vendor.get_best_by_category(my_priority)
+
+        if not my_item or not their_item:
+            return False
+
+        return self.swap_items(other_vendor,my_item,their_item)
