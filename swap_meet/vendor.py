@@ -49,7 +49,11 @@ class Vendor:
 
         
     def get_by_category(self,category):
-        return [item for item in self.inventory if item.get_category() == category]
+        if category is None or category == "" or category == "Unknown":
+            return []
+        else:
+            return [item for item in self.inventory if item.get_category() == category]
+
 
     def get_best_by_category(self,category):
         items = self.get_by_category(category)
