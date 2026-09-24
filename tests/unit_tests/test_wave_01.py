@@ -1,8 +1,10 @@
 from swap_meet.vendor import Vendor
 
+
 def test_vendor_has_inventory():
     vendor = Vendor()
     assert len(vendor.inventory) == 0
+
 
 def test_vendor_takes_optional_inventory():
     inventory = ["a", "b", "c"]
@@ -11,6 +13,7 @@ def test_vendor_takes_optional_inventory():
     assert "a" in vendor.inventory
     assert "b" in vendor.inventory
     assert "c" in vendor.inventory
+
 
 def test_adding_to_inventory():
     vendor = Vendor()
@@ -21,6 +24,7 @@ def test_adding_to_inventory():
     assert len(vendor.inventory) == 1
     assert item in vendor.inventory
     assert result == item
+
 
 def test_removing_from_inventory_returns_item():
     item = "item to remove"
@@ -34,6 +38,7 @@ def test_removing_from_inventory_returns_item():
     assert item not in vendor.inventory
     assert result == item
 
+
 def test_removing_not_found_is_none():
     item = "item to remove"
     vendor = Vendor(
@@ -43,3 +48,4 @@ def test_removing_not_found_is_none():
     result = vendor.remove(item)
 
     assert result == None
+    assert len(vendor.inventory) == 3
