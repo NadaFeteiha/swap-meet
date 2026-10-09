@@ -9,6 +9,7 @@ class Item:
         (1, "Poor"),
         (0, "Unusable")
     ]
+    DEFAULT_CONDITION_DESCRIPTION = "Unknown"
 
     def __init__(self, id=None, condition=0.0):
         self.id = uuid.uuid4().int if id is None else id
@@ -21,7 +22,7 @@ class Item:
         return f"An object of type {self.get_category()} with id {self.id}."
 
     def condition_description(self):
-        for minimum, description in self.CONDITION_DESCRIPTIONS:
+        for minimum, description in Item.CONDITION_DESCRIPTIONS:
             if self.condition >= minimum:
                 return description
-        return "Unknown"
+        return Item.DEFAULT_CONDITION_DESCRIPTION
